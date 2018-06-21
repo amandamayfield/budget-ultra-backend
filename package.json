@@ -6,11 +6,18 @@
   "repository": "git@github.com:amandamayfield/budget-ultra-backend.git",
   "author": "Adam Bullmer <psycodrumfreak@gmail.com>",
   "scripts": {
-    "serve": "node index.js"
+    "serve": "node index.js",
+    "test": "jest"
   },
   "license": "GPL-3.0",
   "private": false,
   "dependencies": {
     "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-plugin-jest": "^21.17.0",
+    "jest": "^23.1.0",
+    "supertest": "^3.1.0"
   }
 }
