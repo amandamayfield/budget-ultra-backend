@@ -30,7 +30,6 @@ module.exports.bootstrap = async function(done) {
   await User.create({
     id: '11111111111111111111111111111111',
     email: 'admin@gmail.com',
-    username: 'admin',
     password: 'admin',
   });
 

@@ -7,6 +7,20 @@
 
 const bcrypt = require('bcrypt-nodejs');
 
+const hashPassword = (user) => {
+  return new Promise((resolve, reject) => {
+    bcrypt.genSalt(10, (saltError, salt) => {
+      bcrypt.hash(user.password, salt, null, (hashError, hash) => {
+        if (hashError) {
+          return reject(hashError);
+        }
+
+        return resolve({ password: hash });
+      });
+    });
+  });
+};
+
 module.exports = {
 
   primaryKey: 'id',
@@ -22,11 +36,6 @@ module.exports = {
       required: true,
       unique: true,
       isEmail: true,
-    },
-    username: {
-      type: 'string',
-      required: true,
-      unique: true,
     },
     password: {
       type: 'string',
@@ -52,20 +61,25 @@ module.exports = {
   customToJSON: function () {
     return _.omit(this, ['password']);
   },
-  beforeCreate: (user, done) => {
-    // Hash password
-    bcrypt.genSalt(10, (saltError, salt) => {
-      bcrypt.hash(user.password, salt, null, (hashError, hash) => {
-        if (hashError) {
-          return done(hashError);
-        }
-
-        user.password = hash;
-
-        return done();
-      });
-    });
+  beforeCreate: async (user, next) => {
+    try {
+      const { password } = await hashPassword(user);
+      user.password = password;
+      return next();
+    } catch (error) {
+      return next(error);
+    }
   },
+
+  beforeUpdate: async (user, next) => {
+    try {
+      const { password } = await hashPassword(user);
+      user.password = password;
+      return next();
+    } catch (error) {
+      return next(error);
+    }
+  }
 
 };
 

@@ -18,6 +18,7 @@ module.exports.policies = {
   ***************************************************************************/
 
   '*': true,
+  'auth/changePassword': 'is-logged-in',
 
   // models
   'account/create'     : 'uuid-id',

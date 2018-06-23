@@ -5,15 +5,15 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
-const interceptJson = (error) => response.json(error);
+const interceptJson = (response) => (error) => response.json(error);
 
 module.exports = {
 
   create: async (request, response) => {
     const { id } = request.body;
     const newModel = await Account.create({ id })
-      .intercept('E_UNIQUE', interceptJson)
-      .intercept({ name: 'UsageError' }, interceptJson)
+      .intercept('E_UNIQUE', interceptJson(response))
+      .intercept({ name: 'UsageError' }, interceptJson(response))
       .fetch();
 
     response.json(newModel);

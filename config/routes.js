@@ -27,9 +27,18 @@ module.exports.routes = {
   '/': { view: 'pages/homepage' },
 
   'GET /signup': { view: 'pages/register'},
+  'POST /signup': 'AuthController.register',
 
   'GET /login': { view: 'pages/login' },
   'POST /login': 'AuthController.login',
+
+  '/auth/register': 'AuthController.register',
+  '/auth/register/:strategy': 'AuthController.socialAuth',
+  '/auth/register/:strategy/callback': 'AuthController.socialAuth',
+
+  // sails will not apply policies to simple views, so we need a controller for it
+  'GET /change-password': 'AuthController.changePassword',
+  'POST /change-password': 'AuthController.changePassword',
 
   '/logout': 'AuthController.logout',
 

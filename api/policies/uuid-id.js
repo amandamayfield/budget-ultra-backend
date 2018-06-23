@@ -9,7 +9,7 @@ const uuidv1 = require('uuid/v1');
  *  6  7    4  5    0  1  2  3    8  9   10 11 12 13 14 15
  * cd ef - 90 ab - 12 34 56 78 - 12 34 - 56 78 90 ab cd ef
  */
-module.exports = async (request, response, done) => {
+module.exports = async (request, response, next) => {
   const pieces = [];
   uuidv1(null, pieces);
   const orderedId = [
@@ -19,6 +19,10 @@ module.exports = async (request, response, done) => {
     ...pieces.slice(8),
   ].join('');
 
-  request.body.id = orderedId;
-  done();
-}
+  if (request.method === 'GET') {
+    request.params.id = orderedId;
+  } else if (request.method === 'POST') {
+    request.body.id = orderedId;
+  }
+  next();
+};
