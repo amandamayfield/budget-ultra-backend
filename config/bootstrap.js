@@ -27,6 +27,13 @@ module.exports.bootstrap = async function(done) {
   // ]);
   // ```
 
+  await User.create({
+    id: '11111111111111111111111111111111',
+    email: 'admin@gmail.com',
+    username: 'admin',
+    password: 'admin',
+  });
+
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.
   // (otherwise your server will never lift, since it's waiting on the bootstrap)
   return done();

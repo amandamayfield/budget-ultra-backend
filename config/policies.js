@@ -17,6 +17,14 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  // '*': true,
+  '*': true,
 
+  // models
+  'account/create'     : 'uuid-id',
+  'category/create'    : 'uuid-id',
+  'goal/create'        : 'uuid-id',
+  'payee/create'       : 'uuid-id',
+  'profile/create'     : 'uuid-id',
+  'transaction/create' : 'uuid-id',
+  'user/create'        : 'uuid-id',
 };

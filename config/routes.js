@@ -24,9 +24,16 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'pages/homepage'
-  },
+  '/': { view: 'pages/homepage' },
+
+  'GET /signup': { view: 'pages/register'},
+
+  'GET /login': { view: 'pages/login' },
+  'POST /login': 'AuthController.login',
+
+  '/logout': 'AuthController.logout',
+
+  // 'GET /me': 'UserController.profile',
 
   /***************************************************************************
   *                                                                          *
