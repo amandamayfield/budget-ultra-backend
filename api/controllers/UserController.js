@@ -5,19 +5,31 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
-const interceptJson = (response) => (error) => response.json(error);
+const passport = require('passport');
 
 module.exports = {
 
   create: async (request, response) => {
-    const payload = request.body || request.params;
-    const { id, email, password, username } = payload;
-    const newUser = await User.create({ id, email, password, username })
-      .intercept('E_UNIQUE', interceptJson(response))
-      .intercept({ name: 'UsageError' }, interceptJson(response))
-      .fetch();
+    try {
+      const { user } = await sails.helpers.passport.protocols.local.register(request.body);
+      return response.ok(user);
+    } catch (error) {
+      sails.log.error(error);
+      // @DEPRECATED
+      return response.negotiate(error);
+    }
 
-    response.json(newUser);
+  },
+
+  update: async (request, response) => {
+    try {
+      const { user } = await sails.helpers.passport.protocols.local.update(request.body);
+      return response.ok(user);
+    } catch (error) {
+      sails.log.error(error);
+      // @DEPRECATED
+      return response.negotiate(error);
+    }
   },
 
 };

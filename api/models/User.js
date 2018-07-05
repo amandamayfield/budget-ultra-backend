@@ -5,21 +5,7 @@
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
  */
 
-const bcrypt = require('bcrypt-nodejs');
-
-const hashPassword = (user) => {
-  return new Promise((resolve, reject) => {
-    bcrypt.genSalt(10, (saltError, salt) => {
-      bcrypt.hash(user.password, salt, null, (hashError, hash) => {
-        if (hashError) {
-          return reject(hashError);
-        }
-
-        return resolve({ password: hash });
-      });
-    });
-  });
-};
+const crypto = require('crypto');
 
 module.exports = {
 
@@ -37,10 +23,6 @@ module.exports = {
       unique: true,
       isEmail: true,
     },
-    password: {
-      type: 'string',
-      required: true,
-    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -55,31 +37,28 @@ module.exports = {
       collection: 'profile',
       via: 'users',
     },
+    passports: {
+      collection: 'Passport',
+      via: 'user',
+    },
 
+  },
+
+  gravatarUrl: function () {
+    const md5 = crypto.createHash('md5');
+    md5.update(this.email || '');
+
+    return 'https://gravatar.com/avatar/' + md5.digest('hex');
   },
 
   customToJSON: function () {
-    return _.omit(this, ['password']);
-  },
-  beforeCreate: async (user, next) => {
-    try {
-      const { password } = await hashPassword(user);
-      user.password = password;
-      return next();
-    } catch (error) {
-      return next(error);
-    }
-  },
 
-  beforeUpdate: async (user, next) => {
-    try {
-      const { password } = await hashPassword(user);
-      user.password = password;
-      return next();
-    } catch (error) {
-      return next(error);
-    }
-  }
+    const user = _.omit(this, ['password']);
+
+    user.gravatarUrl = User.gravatarUrl.call(this);
+
+    return user;
+  },
 
 };
 

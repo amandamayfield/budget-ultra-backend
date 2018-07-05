@@ -18,12 +18,14 @@ module.exports.policies = {
   ***************************************************************************/
 
   '*': true,
-  'auth/changePassword': 'is-logged-in',
+  'auth/change-password': 'is-logged-in',
+  'auth/account'        : 'is-logged-in',
 
   // models
   'account/create'     : 'uuid-id',
   'category/create'    : 'uuid-id',
   'goal/create'        : 'uuid-id',
+  'passport/create'    : 'uuid-id',
   'payee/create'       : 'uuid-id',
   'profile/create'     : 'uuid-id',
   'transaction/create' : 'uuid-id',

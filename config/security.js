@@ -51,4 +51,9 @@ module.exports.security = {
 
   // csrf: false
 
+  captcha: {
+    siteKey: '',
+    secretKey: '',
+  },
+
 };

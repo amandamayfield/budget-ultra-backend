@@ -1,0 +1,22 @@
+<main class="card">
+  <h1>Account</h1>
+
+  <h2><img src="<%= user.gravatarUrl %>" height="80" width="80"/> <%= user.email %></h2>
+
+  <hr>
+  <input type="text" value="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;">
+  <a href="/change-password">Change Password</a>
+
+  <hr>
+  <h3>Connected Accounts</h3>
+
+  <% if (typeof providers != "undefined" && Object.keys(providers).length) { %>
+  <% Object.keys(providers).forEach(function (key) { %>
+  <% if (providers[key].isConnected) { %>
+  <a href="/auth/<%= providers[key].slug %>/disconnect?next=/account" role="button">Click to disconnect <%= providers[key].name %></a>
+  <% } else { %>
+  <a href="/auth/<%= providers[key].slug %>?next=/account" role="button">Click to connect <%= providers[key].name %></a>
+  <% } %>
+  <% }); %>
+  <% } %>
+</main>

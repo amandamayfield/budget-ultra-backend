@@ -30,7 +30,12 @@ module.exports.bootstrap = async function(done) {
   await User.create({
     id: '11111111111111111111111111111111',
     email: 'admin@gmail.com',
-    password: 'admin',
+  });
+  await Passport.create({
+    id: '11111111111111111111111111111111',
+    protocol: 'local',
+    password: 'admin123',
+    user: '11111111111111111111111111111111',
   });
 
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.

@@ -1,4 +1,7 @@
 {
-  "Welcome": "Welcome",
-  "A brand new app.": "A brand new app."
+	"Welcome": "Welcome",
+	"A brand new app.": "A brand new app.",
+	"Error.Passport.User.NotFound": "Error.Passport.User.NotFound",
+	"Error.Passport.Password.NotSet": "Error.Passport.Password.NotSet",
+	"Error.Passport.Generic": "Error.Passport.Generic"
 }

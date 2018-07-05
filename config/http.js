@@ -9,10 +9,10 @@
  * https://sailsjs.com/config/http
  */
 
+const lusca = require('lusca');
 const passport = require('passport');
 
 module.exports.http = {
-
   /****************************************************************************
   *                                                                           *
   * Sails/Express middleware to run for every HTTP request.                   *
@@ -21,16 +21,13 @@ module.exports.http = {
   * https://sailsjs.com/documentation/concepts/middleware                     *
   *                                                                           *
   ****************************************************************************/
-
   middleware: {
-
     /***************************************************************************
     *                                                                          *
     * The order in which middleware should be run for HTTP requests.           *
     * (This Sails app's routes are handled by the "router" middleware below.)  *
     *                                                                          *
     ***************************************************************************/
-
     order: [
       'cookieParser',
       'session',
@@ -42,9 +39,8 @@ module.exports.http = {
       'router',
       'www',
       'favicon',
+      'csp',
     ],
-
-
     /***************************************************************************
     *                                                                          *
     * The body parser that will handle incoming multipart HTTP requests.       *
@@ -52,16 +48,19 @@ module.exports.http = {
     * https://sailsjs.com/config/http#?customizing-the-body-parser             *
     *                                                                          *
     ***************************************************************************/
-
     // bodyParser: (function _configureBodyParser(){
     //   var skipper = require('skipper');
     //   var middlewareFn = skipper({ strict: true });
     //   return middlewareFn;
     // })(),
 
+    csp: lusca.csp({
+      policy: {
+        'default-src': '*',
+      },
+    }),
+
     passportInit: passport.initialize(),
     passportSession: passport.session(),
-
   },
-
 };

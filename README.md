@@ -18,10 +18,29 @@ a [Sails v1](https://sailsjs.com) application
 This app was originally generated on Sat Jun 23 2018 00:36:38 GMT-0500 (CDT) using Sails v1.0.2.
 
 <!-- Internally, Sails used [`sails-generate@1.15.28`](https://github.com/balderdashy/sails-generate/tree/v1.15.28/lib/core-generators/new). -->
-
-
-
 <!--
-Note:  Generators are usually run using the globally-installed `sails` CLI (command-line interface).  This CLI version is _environment-specific_ rather than app-specific, thus over time, as a project's dependencies are upgraded or the project is worked on by different developers on different computers using different versions of Node.js, the Sails dependency in its package.json file may differ from the globally-installed Sails CLI release it was originally generated with.  (Be sure to always check out the relevant [upgrading guides](https://sailsjs.com/upgrading) before upgrading the version of Sails used by your app.  If you're stuck, [get help here](https://sailsjs.com/support).)
+Note: Generators are usually run using the globally-installed `sails` CLI (command-line interface).
+This CLI version is _environment-specific_ rather than app-specific, thus over time, as a project's dependencies are upgraded or the project is worked on by different developers on different computers using different versions of Node.js, the Sails dependency in its package.json file may differ from the globally-installed Sails CLI release it was originally generated with.
+(Be sure to always check out the relevant [upgrading guides](https://sailsjs.com/upgrading) before upgrading the version of Sails used by your app.
+If you're stuck, [get help here](https://sailsjs.com/support).)
 -->
 
+### Auth Notes
+
+- [x] Sign up using local strategy successfully and am logged in
+- [x] Sign up using local strategy with an existing local user -- error
+- [x] Sign up using local strategy with an invalid email
+- [x] Sign up using local strategy with an invalid password
+- [ ] Sign up using local strategy with an existing gmail user and ask to merge with gmail user
+
+- [x] Log in using local strategy with an existing user
+- [ ] Log in using local strategy with an invalid email
+- [ ] Log in using local strategy with an invalid password
+- [ ] Log in using local strategy with a non-existing email
+- [ ] Log in using local strategy with a gmail only user
+
+- [x] Authenticate using gmail strategy with an existing gmail user
+- [x] Authenticate using gmail strategy with an existing local only user
+- [x] Authenticate using gmail stratrgy with a non-existing user
+
+- [ ] Bearer stuff...

@@ -24,25 +24,22 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': { view: 'pages/homepage' },
+  '/'             : 'auth/login',
+  'GET /login'    : 'auth/login',
+  'GET /register' : 'auth/register',
+  '/logout'       : 'auth/logout',
 
-  'GET /signup': { view: 'pages/register'},
-  'POST /signup': 'AuthController.register',
+  'GET /auth/:provider'          : 'auth/provider', // Google Login Initiation
+  'GET /auth/:provider/callback' : 'auth/callback', // Google Login Return
+  'GET /auth/:provider/:action'  : 'auth/callback', // Google Connect/Disconnect (already logged in)
+  'POST /auth/local'             : 'auth/callback', // Local Strategy Login Initiation
+  'POST /auth/local/:action'     : 'auth/callback', // Local Strategy Registration Initiation
 
-  'GET /login': { view: 'pages/login' },
-  'POST /login': 'AuthController.login',
+  'GET /account': 'auth/account',
 
-  '/auth/register': 'AuthController.register',
-  '/auth/register/:strategy': 'AuthController.socialAuth',
-  '/auth/register/:strategy/callback': 'AuthController.socialAuth',
+  'GET /change-password'  : 'auth/change-password',
+  'POST /change-password' : 'auth/change-password',
 
-  // sails will not apply policies to simple views, so we need a controller for it
-  'GET /change-password': 'AuthController.changePassword',
-  'POST /change-password': 'AuthController.changePassword',
-
-  '/logout': 'AuthController.logout',
-
-  // 'GET /me': 'UserController.profile',
 
   /***************************************************************************
   *                                                                          *
