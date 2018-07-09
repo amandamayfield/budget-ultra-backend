@@ -6,19 +6,34 @@
   "repository": "git@github.com:amandamayfield/budget-ultra-backend.git",
   "author": "Adam Bullmer <psycodrumfreak@gmail.com>",
   "scripts": {
-    "serve": "node index.js",
+    "db": "node -r dotenv/config ./src/models/utils",
+    "serve": "nodemon index.js",
     "test": "jest"
   },
   "license": "GPL-3.0",
   "private": false,
   "dependencies": {
-    "express": "^4.16.3"
+    "@chrisalderson/express-winston": "^3.1.0",
+    "base64url": "^3.0.0",
+    "bcrypt": "^2.0.1",
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.2",
+    "crypto": "^1.0.1",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "helmet": "^3.12.1",
+    "mysql2": "^1.5.3",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "sequelize": "^4.38.0",
+    "winston": "^3.0.0"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-plugin-jest": "^21.17.0",
     "jest": "^23.1.0",
     "jest-runner-eslint": "^0.6.0",
+    "nodemon": "^1.17.5",
     "supertest": "^3.1.0"
   }
 }
